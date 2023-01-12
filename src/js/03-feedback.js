@@ -1,16 +1,16 @@
 import throttle from 'lodash.throttle';
 
-// find form
+// Знаходження форми                               
 const feedbackForm = document.querySelector('.feedback-form');
 
-// add listener for input + throttle
+// Додавання слухача події для input + throttle
 feedbackForm.addEventListener('input', throttle(localData, 500));
 
-// find inputs data
+// Посилання на  пошту і повідовлення
 const email = document.querySelector('[name="email"]');
 const message = document.querySelector('[name="message"]');
 
-// set data from input to local storage
+// Передача данних  в локальне сховище                                   
 function localData() {
   const formData = {
     email: email.value,
@@ -19,7 +19,7 @@ function localData() {
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }
 
-// function to get input data from local storage
+// Створення функції, щоб отримати дані
 function getLocalData() {
   let localData = JSON.parse(localStorage.getItem('feedback-form-state'));
   if (localData !== null) {
@@ -28,13 +28,11 @@ function getLocalData() {
   }
 }
 
-// run function
 getLocalData();
 
-// add listener to the submit form button
+// Додавання слухача події на клік по кнопці
 feedbackForm.addEventListener('submit', submitData);
 
-// run function at submit and console log input data
 function submitData(e) {
   e.preventDefault();
   this.reset();
